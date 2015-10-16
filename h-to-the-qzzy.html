@@ -3,12 +3,36 @@
 </head>
 
 <body>
-  <h1>Welcome to Meteor!</h1>
-
-  {{> hello}}
+	<h1>H to the Qzzy!</h1>	
+	<h2>Who's lyric is this?</h2>
+	{{> question}}
 </body>
 
-<template name="hello">
-  <button>Click Me</button>
-  <p>You've pressed the button {{counter}} times.</p>
+<template name="question">
+	
+	<div>
+		<p>{{lyric.lyric}}</p>
+	</div>
+	<form class="question">
+		<ul>
+			{{#each choices}}
+				{{> choice}}
+			{{/each}}
+		</ul>
+	</form>
+	<div>
+		{{answer}}
+	</div>
+	<div>
+		{{result}}
+	</div>
+</template>
+
+<template name="choice">
+	<li>
+	<label for="rb_{{_id}}">
+		<input type="radio" id="rb_{{_id}}" name="choice" value="{{_id}}"/>
+		{{artist}}
+	</label>
+	</li>
 </template>

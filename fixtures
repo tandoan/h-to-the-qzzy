@@ -1,0 +1,11 @@
+db.lyrics.insert({	artist: "Kanye West",lyric: "Mayonaise colored Benz, I push Miricle Whips"});
+
+
+db.lyrics.insert({artist: "Brother Ali",lyric: "Life's rainwater flows through the same gutter that we walk today, gotta stay straight brother"});
+db.lyrics.insert({artist: "Outkast",lyric: "She need to get a piece of the American pie and take her bite out.  That's my house, I'll disconnect the cable and turn the lights out."
+});
+db.lyrics.insert({artist: "Lauren Hill",lyric: "Don't be a hard rock when you really are a gem"
+});
+db.lyrics.insert({artist: "Jay Z",lyric: "I check cheddar like a food inspector"
+});
+db.lyrics.insert({artist: "Skee-Lo", lyric: "I take the one ten to the one oh five, get off at Crenshaw, tell my homies look alive."});
