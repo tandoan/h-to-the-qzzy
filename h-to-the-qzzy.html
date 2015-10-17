@@ -9,7 +9,6 @@
 </body>
 
 <template name="question">
-	
 	<div>
 		<p>{{lyric.lyric}}</p>
 	</div>
@@ -24,7 +23,13 @@
 		{{answer}}
 	</div>
 	<div>
-		{{result}}
+		{{correctness}}
+	</div>
+
+	<div class="score">
+		{{#if totalAttempts}}
+			{{totalCorrect}}/{{totalAttempts}}
+		{{/if}}
 	</div>
 </template>
 
