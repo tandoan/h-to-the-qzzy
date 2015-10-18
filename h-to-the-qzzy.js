@@ -1,5 +1,6 @@
 Lyrics = new Mongo.Collection("lyrics");
 
+var animationInterval;
 function getCurrentLyric(){
   return Session.get("currentLyric");
 }
@@ -12,7 +13,6 @@ function getRandomLyric(){
   current = Session.get("currentLyric"),
   shuffledLyrics = _.shuffle(Lyrics.find().fetch());
 
-debugger;
   if(current){
     do {
       ret = shuffledLyrics.shift();
@@ -33,11 +33,36 @@ function uncheckAllQuestions(){
   $(".question input:checked").attr('checked',false);
 }
 
+function disableAllQuestions(){
+  $(".question input").attr('disabled',true);
+}
+
+function enableAllQuestions(){
+  $(".question input").attr('disabled',false);
+}
+
+function animateResultBlock(element,interval){
+  var currentOpacity = element.style.opacity;
+  var newOpacity;
+
+  if(currentOpacity > 0){
+    newOpacity = currentOpacity - .1;
+    element.style.opacity = newOpacity;
+  } else {
+    element.style.opacity = 1;
+    Session.set("answer", '');
+    Session.set("correctness", '');
+    enableAllQuestions();
+    uncheckAllQuestions();
+    getAndSetRandomLyric();    
+    clearInterval(animationInterval);
+  }
+}
+
 function resetAndGetNewQuestion(){
-  Session.set("answer", '');
-  Session.set("correctness", '');
-  uncheckAllQuestions();
-  getAndSetRandomLyric();
+  var resultBlock = document.getElementById('result-block');
+  var animation = animateResultBlock.bind(null,resultBlock);
+  animationInterval = setInterval(animation,100);
 }
 
 if (Meteor.isClient) {
@@ -88,7 +113,7 @@ if (Meteor.isClient) {
           Session.set("correctness", "No Match :(");
         }
         Session.set("totalAttempts", Session.get("totalAttempts")+1);
-
+        disableAllQuestions();
         // reset the board
         setTimeout(resetAndGetNewQuestion, 1000);
 
