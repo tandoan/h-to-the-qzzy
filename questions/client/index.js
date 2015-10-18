@@ -1,5 +1,4 @@
 Lyrics = new Mongo.Collection("lyrics");
-
 var animationInterval;
 function getCurrentLyric(){
   return Session.get("currentLyric");
@@ -8,6 +7,7 @@ function getCurrentLyric(){
 function setCurrentLyric(lyric){
   return Session.set("currentLyric", lyric);
 }
+
 function getRandomLyric(){
   var ret,
   current = Session.get("currentLyric"),
@@ -65,7 +65,6 @@ function resetAndGetNewQuestion(){
   animationInterval = setInterval(animation,100);
 }
 
-if (Meteor.isClient) {
   // counter starts at 0
   Session.setDefault('counter', 0);
   Session.setDefault('totalAttempts', 0);
@@ -81,7 +80,10 @@ if (Meteor.isClient) {
       return l;
    }, 
     choices: function(){
-      return Lyrics.find({});
+            console.log('chices');
+            var c = Lyrics.find({});
+            console.log(c.fetch());
+      return c;
     },
     answer: function(){
       return Session.get("answer");
@@ -119,10 +121,8 @@ if (Meteor.isClient) {
 
     }
   })
-}
-
-if (Meteor.isServer) {
-  Meteor.startup(function () {
-    // code to run on server at startup
-  });
-}
+//if (Meteor.isServer) {
+//  Meteor.startup(function () {
+//    // code to run on server at startup
+//  });
+//}
