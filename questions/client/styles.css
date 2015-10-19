@@ -1,1 +1,8 @@
 /* CSS declarations go here */
+
+/* make this narrow */
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
