@@ -3,32 +3,46 @@
 </head>
 
 <body>
-	<h1>H to the Qzzy!</h1>	
-	<h2>Who's lyric is this?</h2>
-	{{> question}}
+	<div class="container">
+		<div class="row">
+			<h1>H to the Qzzy!</h1>	
+			<div class="col-lg-12">
+				{{> question}}		
+			</div>
+		</div>
+	</div>
+
 </body>
 
 <template name="question">
-	<div>
-		<p>{{lyric.lyric}}</p>
-	</div>
-	<form class="question">
-		<ul>
-			{{#each choices}}
-				{{> choice}}
-			{{/each}}
-		</ul>
-	</form>
-	<div id="result-block">
-		{{answer}}
-		{{correctness}}
+	<div class="container">
+		<div class="row">
+			<div class="col-lg-12">
+				<h2>Who's lyric is this?</h2>
+				<p>{{lyric.lyric}}</p>
+				<div id="result-block" style="height:1.5em">
+					<span id="answer-span" class="answer pull-left" >
+					{{answer}}
+					</span>
+					<span class="score pull-right">
+						Current Score: {{totalCorrect}}/{{totalAttempts}}
+					</span>
+				</div>
+				
+				<form class="question">
+					<ul>
+						{{#each choices}}
+						{{> choice}}
+						{{/each}}
+					</ul>
+				</form>		
+			</div>
+
+	
+		</div>
 	</div>
 
-	<div class="score">
-		{{#if totalAttempts}}
-			{{totalCorrect}}/{{totalAttempts}}
-		{{/if}}
-	</div>
+
 </template>
 
 <template name="choice">
