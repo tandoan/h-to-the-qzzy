@@ -60,7 +60,7 @@ function animateResultBlock(element,interval){
 }
 
 function resetAndGetNewQuestion(){
-  var resultBlock = document.getElementById('result-block');
+  var resultBlock = document.getElementById('answer-span');
   var animation = animateResultBlock.bind(null,resultBlock);
   animationInterval = setInterval(animation,100);
 }
@@ -81,9 +81,18 @@ function resetAndGetNewQuestion(){
    }, 
     choices: function(){
             console.log('chices');
-            var c = Lyrics.find({});
-            console.log(c.fetch());
-      return c;
+            var choices = [];
+            var current = getCurrentLyric() 
+            choices.push(current);
+            console.log('current',current);
+
+            var c = Lyrics.find({artist: {$ne: current.artist}}).fetch();
+            c = _.shuffle(c);
+            choices.push(c.shift());
+            choices.push(c.shift());
+            choices.push(c.shift());
+
+      return _.shuffle(choices);
     },
     answer: function(){
       return Session.get("answer");
@@ -104,7 +113,7 @@ function resetAndGetNewQuestion(){
     "change .question": function (event){
       console.log('changed!')
         var current = getCurrentLyric();
-        Session.answer = current.artist;
+        Session.set("answer", current.artist);
 
         if( event.target.value == current._id.toString()){
           console.log("Correct@!");
