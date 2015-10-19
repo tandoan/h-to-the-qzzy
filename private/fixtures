@@ -1,11 +1,50 @@
-db.lyrics.insert({	artist: "Kanye West",lyric: "Mayonaise colored Benz, I push Miricle Whips"});
-
-
-db.lyrics.insert({artist: "Brother Ali",lyric: "Life's rainwater flows through the same gutter that we walk today, gotta stay straight brother"});
-db.lyrics.insert({artist: "Outkast",lyric: "She need to get a piece of the American pie and take her bite out.  That's my house, I'll disconnect the cable and turn the lights out."
-});
-db.lyrics.insert({artist: "Lauren Hill",lyric: "Don't be a hard rock when you really are a gem"
-});
-db.lyrics.insert({artist: "Jay Z",lyric: "I check cheddar like a food inspector"
-});
-db.lyrics.insert({artist: "Skee-Lo", lyric: "I take the one ten to the one oh five, get off at Crenshaw, tell my homies look alive."});
+[
+   {
+      "artist":"Kanye West",
+      "lyric":"Mayonaise colored Benz, I push Miricle Whips"
+   },
+   {
+      "artist":"Brother Ali",
+      "lyric":"Life's rainwater flows through the same gutter that we walk today, gotta stay straight brother"
+   },
+   {
+      "artist":"Outkast",
+      "lyric":"She need to get a piece of the American pie and take her bite out.  That's my house, I'll disconnect the cable and turn the lights out."
+   },
+   {
+      "artist":"Lauren Hill",
+      "lyric":"Don't be a hard rock when you really are a gem"
+   },
+   {
+      "artist":"Jay Z",
+      "lyric":"I check cheddar like a food inspector"
+   },
+   {
+      "artist":"Skee-Lo",
+      "lyric":"I take the one ten to the one oh five, get off at Crenshaw, tell my homies look alive."
+   },
+   {
+      "artist":"Dead Prez",
+      "lyric":"If you check 1,2, my word of advice to you is just relax. Just do what you got to do, if that don't work then kick the facts. If you a fighter, rider, ?bout'er?, flame ignitor, crowd exciter.  Or you wanna just get high, then just say it.  But then if you a liar-liar, pants on fire, wolf-cry agent with a wire, I'm gonna know it when I play it"
+   },
+   {
+      "artist":"Bone Thugs N Harmony",
+      "lyric":"Lil Eazy's long gone. Really wish he would come home. But when it's time to die. Gotta go bye bye. All a lil thug could do is cry, cry. Why they kill my dog and man I miss my uncle Charles y'all"
+   },
+   {
+      "artist":"Drake",
+      "lyric":"I was trying to get it on my own. Working all night, traffic on the way home. And my uncle calling me like 'Where ya at? I gave you the keys told ya bring it right back'"
+   },
+   {
+      "artist":"Wiz Khalifa",
+      "lyric":"Soon as I hit the club look at them hoes face. Hit the pedal once make the floor shake. Suede insides, my engine roarin' It's the big boy you know what I payed for it. And I got the pedal to the metal"
+   },
+   {
+      "artist":"The Notorious B.I.G.",
+      "lyric":"Now I'm in the limelight cause I rhyme tight. Time to get paid, blow up like the World Trade. Born sinner, the opposite of a winner. Remember when I used to eat sardines for dinner"
+   },
+   {
+      "artist":"Warren G",
+      "lyric":"They got guns to my head, I think I'm goin' down. I can't believe it's happenin' in my own town. If I had wings, I would fly, let me contemplate. I glanced in the cut and I see my homie, Nate. Sixteen in the clip and one in the hole. Nate Dogg is about to make some bodies turn cold. Now they droppin' and yellin', it's a tad bit late"
+   }
+]
