@@ -41,28 +41,18 @@ function enableAllQuestions(){
   $(".question input").attr('disabled',false);
 }
 
-function animateResultBlock(element,interval){
-  var currentOpacity = element.style.opacity;
-  var newOpacity;
+function resetAndGetNewQuestion(){
 
-  if(currentOpacity > 0){
-    newOpacity = currentOpacity - .1;
-    element.style.opacity = newOpacity;
-  } else {
-    element.style.opacity = 1;
+  var resultBlock = $('#answer-span');
+  
+  resultBlock.fadeOut(1000,function(){
+    resultBlock.css('opacity',1);
     Session.set("answer", '');
     Session.set("correctness", '');
     enableAllQuestions();
     uncheckAllQuestions();
     getAndSetRandomLyric();    
-    clearInterval(animationInterval);
-  }
-}
-
-function resetAndGetNewQuestion(){
-  var resultBlock = document.getElementById('answer-span');
-  var animation = animateResultBlock.bind(null,resultBlock);
-  animationInterval = setInterval(animation,100);
+  });
 }
 
   // counter starts at 0
