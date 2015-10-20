@@ -1,5 +1,5 @@
 Lyrics = new Mongo.Collection("lyrics");
-var animationInterval;
+
 function getCurrentLyric(){
   return Session.get("currentLyric");
 }
@@ -17,7 +17,6 @@ function getRandomLyric(){
     do {
       ret = shuffledLyrics.shift();
     } while(ret._id.toString() === current._id.toString());
-    console.log(ret,current);
   } else {
       ret = shuffledLyrics.shift();
   }
@@ -43,17 +42,18 @@ function enableAllQuestions(){
 
 function resetAndGetNewQuestion(){
 
-  var resultBlock = $('#answer-span');
 
-  resultBlock.fadeOut(1000,function(){
-    Session.set("answer", '');
-    Session.set("correctness", '');
-    enableAllQuestions();
-    uncheckAllQuestions();
-    getAndSetRandomLyric();    
-    
-    resultBlock.fadeIn(0);
+  var current = getCurrentLyric();
+  var answerLabel = $('label[for=rb_' + current._id.toString() + ']')[0];
+  answerLabel = $(answerLabel);
+
+  answerLabel.css('font-weight',700);
+  answerLabel.animate({'font-weight':400},1000, 'swing', function(){
+      enableAllQuestions();
+  uncheckAllQuestions();
+  getAndSetRandomLyric();    
   });
+
 }
 
   // counter starts at 0
@@ -71,11 +71,9 @@ function resetAndGetNewQuestion(){
       return l;
    }, 
     choices: function(){
-            console.log('chices');
             var choices = [];
             var current = getCurrentLyric() 
             choices.push(current);
-            console.log('current',current);
 
             var c = Lyrics.find({artist: {$ne: current.artist}}).fetch();
             c = _.shuffle(c);
@@ -102,27 +100,19 @@ function resetAndGetNewQuestion(){
   Template.question.events({
 
     "change .question": function (event){
-      console.log('changed!')
         var current = getCurrentLyric();
-        Session.set("answer", current.artist);
 
         if( event.target.value == current._id.toString()){
-          console.log("Correct@!");
           Session.set("correctness", "CORRECT!");
           Session.set("totalCorrect", Session.get("totalCorrect")+1);
         } else {
-          console.log("No Match :(");
           Session.set("correctness", "No Match :(");
         }
         Session.set("totalAttempts", Session.get("totalAttempts")+1);
         disableAllQuestions();
+        
         // reset the board
-        setTimeout(resetAndGetNewQuestion, 1000);
+        resetAndGetNewQuestion;
 
     }
   })
-//if (Meteor.isServer) {
-//  Meteor.startup(function () {
-//    // code to run on server at startup
-//  });
-//}
