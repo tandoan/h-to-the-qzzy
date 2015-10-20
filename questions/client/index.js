@@ -1,4 +1,8 @@
 Lyrics = new Mongo.Collection("lyrics");
+// counter starts at 0
+Session.setDefault('counter', 0);
+Session.setDefault('totalAttempts', 0);
+Session.setDefault('totalCorrect', 0);
 
 function getCurrentLyric(){
   return Session.get("currentLyric");
@@ -18,7 +22,7 @@ function getRandomLyric(){
       ret = shuffledLyrics.shift();
     } while(ret._id.toString() === current._id.toString());
   } else {
-      ret = shuffledLyrics.shift();
+    ret = shuffledLyrics.shift();
   }
 
   return ret;
@@ -49,70 +53,67 @@ function resetAndGetNewQuestion(){
 
   answerLabel.css('font-weight',700);
   answerLabel.animate({'font-weight':400},1000, 'swing', function(){
-      enableAllQuestions();
-  uncheckAllQuestions();
-  getAndSetRandomLyric();    
+    enableAllQuestions();
+    uncheckAllQuestions();
+    getAndSetRandomLyric();    
   });
 
 }
 
-  // counter starts at 0
-  Session.setDefault('counter', 0);
-  Session.setDefault('totalAttempts', 0);
-  Session.setDefault('totalCorrect', 0);
-  
-  Template.question.helpers({
-   lyric: function(){
-      var l = getCurrentLyric();
-      if(!l){
-        getAndSetRandomLyric();
-        l = getCurrentLyric();
-      }
-      return l;
-   }, 
-    choices: function(){
-            var choices = [];
-            var current = getCurrentLyric() 
-            choices.push(current);
 
-            var c = Lyrics.find({artist: {$ne: current.artist}}).fetch();
-            c = _.shuffle(c);
-            choices.push(c.shift());
-            choices.push(c.shift());
-            choices.push(c.shift());
 
-      return _.shuffle(choices);
-    },
-    answer: function(){
-      return Session.get("answer");
-    },
-    correctness: function(){
-      return Session.get("correctness");
-    },
-    totalAttempts: function(){
-      return Session.get("totalAttempts");
-    },
-    totalCorrect: function(){
-      return Session.get("totalCorrect");
+Template.question.helpers({
+  lyric: function(){
+    var l = getCurrentLyric();
+    if(!l){
+      getAndSetRandomLyric();
+      l = getCurrentLyric();
     }
-  });
+    return l;
+  }, 
+  choices: function(){
+    var choices = [];
+    var current = getCurrentLyric() 
+    choices.push(current);
 
-  Template.question.events({
+    var c = Lyrics.find({artist: {$ne: current.artist}}).fetch();
+    c = _.shuffle(c);
+    choices.push(c.shift());
+    choices.push(c.shift());
+    choices.push(c.shift());
 
-    "change .question": function (event){
-        var current = getCurrentLyric();
+    return _.shuffle(choices);
+  },
+  answer: function(){
+    return Session.get("answer");
+  },
+  correctness: function(){
+    return Session.get("correctness");
+  },
+  totalAttempts: function(){
+    return Session.get("totalAttempts");
+  },
+  totalCorrect: function(){
+    return Session.get("totalCorrect");
+  }
+});
 
-        if( event.target.value == current._id.toString()){
-          Session.set("correctness", "CORRECT!");
-          Session.set("totalCorrect", Session.get("totalCorrect")+1);
-        } else {
-          Session.set("correctness", "No Match :(");
-        }
-        Session.set("totalAttempts", Session.get("totalAttempts")+1);
-        disableAllQuestions();
-        
-        // reset the board
-        resetAndGetNewQuestion;
+Template.question.events({
 
+  "change .question": function (event){
+    var current = getCurrentLyric();
+
+    if( event.target.value == current._id.toString()){
+      Session.set("correctness", "CORRECT!");
+      Session.set("totalCorrect", Session.get("totalCorrect")+1);
+    } else {
+      Session.set("correctness", "No Match :(");
     }
-  })
+    Session.set("totalAttempts", Session.get("totalAttempts")+1);
+    disableAllQuestions();
+
+    // reset the board
+    resetAndGetNewQuestion;
+
+  }
+})
