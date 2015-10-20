@@ -45,18 +45,21 @@ function enableAllQuestions(){
 }
 
 function resetAndGetNewQuestion(){
-
-
   var current = getCurrentLyric();
   var answerLabel = $('label[for=rb_' + current._id.toString() + ']')[0];
   answerLabel = $(answerLabel);
 
+  // TODO: find better way to do this
   answerLabel.css('font-weight',700);
-  answerLabel.animate({'font-weight':400},1000, 'swing', function(){
-    enableAllQuestions();
-    uncheckAllQuestions();
-    getAndSetRandomLyric();    
-  });
+  setTimeout(function(){answerLabel.css('font-weight',600)}, 333);
+  setTimeout(function(){answerLabel.css('font-weight',500)}, 666);
+  setTimeout(function(){answerLabel.css('font-weight',400)}, 1000);
+
+  setTimeout(function(){
+        enableAllQuestions();
+        uncheckAllQuestions();
+        getAndSetRandomLyric();    
+  }, 1000);
 
 }
 
@@ -113,7 +116,7 @@ Template.question.events({
     disableAllQuestions();
 
     // reset the board
-    resetAndGetNewQuestion;
+    resetAndGetNewQuestion();
 
   }
 })
