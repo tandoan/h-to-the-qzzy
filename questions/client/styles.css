@@ -9,8 +9,8 @@
 
 .main-question.container{
 	border: 1px solid #ffff64;
-/*	border-radius:1em;
-*/}
+	padding-bottom:1em;
+}
 
 body {
 	background-color:#000;
