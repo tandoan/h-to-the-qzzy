@@ -44,14 +44,15 @@ function enableAllQuestions(){
 function resetAndGetNewQuestion(){
 
   var resultBlock = $('#answer-span');
-  
+
   resultBlock.fadeOut(1000,function(){
-    resultBlock.css('opacity',1);
     Session.set("answer", '');
     Session.set("correctness", '');
     enableAllQuestions();
     uncheckAllQuestions();
     getAndSetRandomLyric();    
+    
+    resultBlock.fadeIn(0);
   });
 }
 

@@ -6,3 +6,34 @@
     max-width: 730px;
   }
 }
+
+.main-question.container{
+	border: 1px solid #ffff64;
+/*	border-radius:1em;
+*/}
+
+body {
+	background-color:#000;
+	color:#ccc;
+}
+
+.question label {
+	font-weight:normal
+}
+.question ul {
+	list-style:none;
+	padding-left:0;
+}
+.question ul input[type="radio"] {
+	margin-right:1em;
+}
+
+.mic {
+	background-image: url("/images/mic.jpg");
+	background-position: 72% 50%;
+    background-repeat: no-repeat;
+}
+h1.title {
+	text-align:center;
+	color:#fff;
+}
