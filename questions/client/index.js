@@ -4,6 +4,7 @@ Session.setDefault('counter', 0);
 Session.setDefault('totalAttempts', 0);
 Session.setDefault('totalCorrect', 0);
 
+
 function getCurrentLyric(){
   return Session.get("currentLyric");
 }
@@ -12,6 +13,7 @@ function setCurrentLyric(lyric){
   return Session.set("currentLyric", lyric);
 }
 
+// get not-so random lyric.  Don't display the last lyric.
 function getRandomLyric(){
   var ret,
   current = Session.get("currentLyric"),
@@ -44,26 +46,29 @@ function enableAllQuestions(){
   $(".question input").attr('disabled',false);
 }
 
+function setFontWeight(elem,weight){
+  elem.css('font-weight', weight);
+}
+
+function animateAnswerLabel(answerLabel){
+  answerLabel.css('font-weight',700);
+  setTimeout(setFontWeight.bind(null,answerLabel,400), 1000);
+}
+
 function resetAndGetNewQuestion(){
   var current = getCurrentLyric();
   var answerLabel = $('label[for=rb_' + current._id.toString() + ']')[0];
   answerLabel = $(answerLabel);
 
-  // TODO: find better way to do this
-  answerLabel.css('font-weight',700);
-  setTimeout(function(){answerLabel.css('font-weight',600)}, 333);
-  setTimeout(function(){answerLabel.css('font-weight',500)}, 666);
-  setTimeout(function(){answerLabel.css('font-weight',400)}, 1000);
+  animateAnswerLabel(answerLabel);
 
   setTimeout(function(){
-        enableAllQuestions();
-        uncheckAllQuestions();
-        getAndSetRandomLyric();    
+    enableAllQuestions();
+    uncheckAllQuestions();
+    getAndSetRandomLyric();    
   }, 1000);
 
 }
-
-
 
 Template.question.helpers({
   lyric: function(){
